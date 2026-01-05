@@ -9,9 +9,16 @@ public class Q9 {
         sc.close();
         int sumofcubes=0;
         int decoy=n;
+        int length=0;
         while(decoy!=0)
         {
-            sumofcubes+=Math.pow(decoy%10,3);
+            length++;
+            decoy/=10;
+        }
+        decoy=n;
+        while(decoy!=0)
+        {
+            sumofcubes+=Math.pow(decoy%10,length);
             decoy/=10;
         }
         if(sumofcubes==n)
