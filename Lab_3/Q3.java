@@ -97,7 +97,7 @@ public class Q3 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("\nEnter length, breadth, height of Box:");
+        System.out.print("\nEnter length, breadth, height of Box:");
         double boxLength = sc.nextDouble();
         double boxBreadth = sc.nextDouble();
         double boxHeight = sc.nextDouble();
@@ -105,20 +105,20 @@ public class Q3 {
         System.out.println("Surface Area of Box: " + box.SurfaceArea());
         System.out.println("Volume of Box: " + box.volume());
 
-        System.out.println("\nEnter length of Cube:");
+        System.out.print("\nEnter length of Cube:");
         double cubeLength = sc.nextDouble();
         Cube cube = new Cube(cubeLength);
         System.out.println("Surface Area of Cube: " + cube.SurfaceArea());
         System.out.println("Volume of Cube: " + cube.volume());
 
-        System.out.println("\nEnter radius and height of Cylinder:");
+        System.out.print("\nEnter radius and height of Cylinder:");
         double cylinderRadius = sc.nextDouble();
         double cylinderHeight = sc.nextDouble();
         Cylinder cylinder = new Cylinder(cylinderRadius, cylinderHeight);
         System.out.println("Surface Area of Cylinder: " + cylinder.SurfaceArea());
         System.out.println("Volume of Cylinder: " + cylinder.volume());
 
-        System.out.println("\nEnter radius and height of Cone:");
+        System.out.print("\nEnter radius and height of Cone:");
         double coneRadius = sc.nextDouble();
         double coneHeight = sc.nextDouble();
         Cone cone = new Cone(coneRadius, coneHeight);
