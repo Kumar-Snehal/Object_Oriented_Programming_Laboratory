@@ -1,3 +1,5 @@
+package Lab_2;
+
 import java.util.*;
 
 class Garments {

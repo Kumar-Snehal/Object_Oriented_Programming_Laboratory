@@ -1,3 +1,5 @@
+package Lab_2;
+
 class NumberHolder {
     public int anInt;
     public float aFloat;

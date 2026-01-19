@@ -1,3 +1,5 @@
+package Lab_2;
+
 class Date {
     private int day, month, year;
 
@@ -72,7 +74,7 @@ class Date {
         String YearFormat = Integer.toString((int) Math.abs(year));
         if (year < 0)
             YearFormat = YearFormat + " B.C.";
-        System.out.println("\n"+MonthName + " " + DayFormat + ", " + YearFormat+"\n");
+        System.out.println("\n" + MonthName + " " + DayFormat + ", " + YearFormat + "\n");
     }
 }
 
@@ -82,7 +84,7 @@ public class Q7 {
         d1.Display();
         d1.Modify(6, 2, 2005);
         d1.Display();
-        Date d2= new Date(-6,-2,-2005);
+        Date d2 = new Date(-6, -2, -2005);
         d2.Display();
     }
 }

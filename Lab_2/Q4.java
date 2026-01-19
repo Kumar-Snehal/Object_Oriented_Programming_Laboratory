@@ -1,3 +1,5 @@
+package Lab_2;
+
 class Student {
     private int marks;
 

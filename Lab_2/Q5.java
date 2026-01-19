@@ -1,3 +1,5 @@
+package Lab_2;
+
 class Subject {
     // static to store total counts and marks
     static private int totalMarks = 0;

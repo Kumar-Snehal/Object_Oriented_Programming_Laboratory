@@ -1,3 +1,5 @@
+package Lab_2;
+
 class Movie {
     private String title;
     private int year;
