@@ -69,39 +69,47 @@ class LLQ implements FIFO {
 class ArrQ implements FIFO {
     private final int maxLen = 100;
     private final int arr[] = new int[maxLen];
-    private int rear;
+    private int size, front, rear;
 
     public ArrQ() {
-        rear = -1;
+        front = 0;
+        rear = 0;
+        size = 0;
     }
 
     @Override
     public int Front() {
-        if (rear == -1)
+        if (size == 0)
             return 0;
-        return arr[0];
+        return arr[front];
     }
 
     @Override
     public void Enqueue(int element) {
-        if (rear == maxLen - 1) {
+        if (size == maxLen) {
             System.out.println("Error: Queue Capacity Full");
         } else {
-            arr[++rear] = element;
+            size++;
+            arr[rear++] = element;
+            if (rear == maxLen)
+                rear = 0;
         }
     }
 
     @Override
     public void Dequeue() {
-        for (int i = 0; i < rear; i++)
-            arr[i] = arr[i++];
-        rear--;
+        if (size > 0) {
+            size--;
+            front++;
+            if(front==maxLen)
+                front=0;
+        }
     }
 
     @Override
     public void PrintQueue() {
         System.out.print("Queue:");
-        for (int i = 0; i <= rear; i++)
+        for (int i = front; i != rear; i=(i+1)%maxLen)
             System.out.print(" " + arr[i]);
         System.out.println();
     }
