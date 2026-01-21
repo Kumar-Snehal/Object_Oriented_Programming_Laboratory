@@ -109,8 +109,8 @@ class ArrQ implements FIFO {
     @Override
     public void PrintQueue() {
         System.out.print("Queue:");
-        for (int i = front; i != rear; i=(i+1)%maxLen)
-            System.out.print(" " + arr[i]);
+        for (int i = 0; i < size; i++)
+            System.out.print(" " + arr[(front+i)%maxLen]);
         System.out.println();
     }
 }
