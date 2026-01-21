@@ -8,13 +8,13 @@ enum professor_type {
     assistant;
 }
 
-abstract class Person {
+abstract class Persons {
 
     private String name;
     private int unique_id;
     private static int id = 1;
 
-    Person(String name) {
+    public Persons(String name) {
         unique_id = id++;
         this.name = name;
     }
@@ -27,14 +27,14 @@ abstract class Person {
         return name;
     }
 
-    public abstract void Display();
+    abstract public void Display();
 }
 
-class Staff extends Person {
+class Staff extends Persons {
 
     private Office office;
 
-    Staff(String name, Office office) {
+    public Staff(String name, Office office) {
         super(name);
         this.office = office;
     }
@@ -55,12 +55,12 @@ class Staff extends Person {
     }
 }
 
-class Professor extends Person {
+class Professor extends Persons {
 
     private professor_type type;
     private Department department;
 
-    Professor(String name, professor_type type, Department department) {
+    public Professor(String name, professor_type type, Department department) {
         super(name);
         this.type = type;
         this.department = department;
@@ -96,7 +96,7 @@ abstract class Room {
     private int number_id;
     private static int id = 1;
 
-    Room() {
+    public Room() {
         number_id = id++;
     }
 
@@ -111,7 +111,7 @@ class Classroom extends Room {
 
     private int number_of_seats;
 
-    Classroom(int number_of_seats) {
+    public Classroom(int number_of_seats) {
         super();
         this.number_of_seats = number_of_seats;
     }
@@ -135,7 +135,7 @@ class Office extends Room {
 
     private Department department;
 
-    Office(Department department) {
+    public Office(Department department) {
         super();
         this.department = department;
         if (department != null) {
@@ -163,7 +163,7 @@ class Department {
     private String name;
     private ArrayList<Office> offices;
 
-    Department(String name) {
+    public Department(String name) {
         this.name = name;
         this.offices = new ArrayList<>();
     }
