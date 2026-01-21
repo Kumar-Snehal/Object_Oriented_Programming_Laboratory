@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Work from the directory where this script is located
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+# Preview
+find . -mindepth 2 -type f -name '*.class' -print
+
+# Delete (uncomment to actually delete)
+find . -mindepth 2 -type f -name '*.class' -delete
+echo "Deleted all .class files"
