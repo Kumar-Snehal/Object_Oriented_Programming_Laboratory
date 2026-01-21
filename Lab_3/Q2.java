@@ -26,7 +26,7 @@ class Stock extends Asset {
     void displayDetails() {
         System.out.println();
         System.out.println("Descriptor: " + descriptor);
-        System.out.println("Date: ");
+        System.out.print("Date: ");
         date.display();
         System.out.println("Current Value: " + current_value);
         System.out.println("Number of Shares: " + num_shares);
@@ -51,7 +51,7 @@ class Bond extends Asset {
     void displayDetails() {
         System.out.println();
         System.out.println("Descriptor: " + descriptor);
-        System.out.println("Date: ");
+        System.out.print("Date: ");
         date.display();
         System.out.println("Current Value: " + current_value);
         System.out.println("Interest Rate: " + interest_rate);
@@ -75,7 +75,7 @@ class Savings extends Asset {
     void displayDetails() {
         System.out.println();
         System.out.println("Descriptor: " + descriptor);
-        System.out.println("Date: ");
+        System.out.print("Date: ");
         date.display();
         System.out.println("Current Value: " + current_value);
         System.out.println("Interest Rate: " + interest_rate);

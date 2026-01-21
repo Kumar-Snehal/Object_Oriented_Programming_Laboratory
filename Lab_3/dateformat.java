@@ -18,6 +18,6 @@ public class dateformat {
     }
 
     public void display() {
-        System.out.print("" + day + "/" + month + "/" + year);
+        System.out.println("" + day + "/" + month + "/" + year);
     }
 }
