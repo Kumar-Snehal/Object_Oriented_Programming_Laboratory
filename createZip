@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <lab_folder>"
+  echo "Example: $0 Lab_3"
+  exit 1
+fi
+
+Folder="${1%/}"              # remove trailing /
+OUT="22CS02009_KumarSnehal.zip"
+
+if [ ! -d "$Folder" ]; then
+  echo "Error: folder not found: $Folder"
+  exit 1
+fi
+
+# 1) Add ONLY .java files, keeping them inside the Lab folder path in the zip
+shopt -s globstar nullglob
+java_files=( "$Folder"/**/*.java )
+pdf_files=( "$Folder"/*.pdf )
+shopt -u globstar
+
+rm -f "$OUT"
+
+if [ "${#java_files[@]}" -gt 0 ]; then
+  zip -r "$OUT" "${java_files[@]}"
+fi
+
+# 2) Add PDFs, but put them directly in the zip root (no folders)
+if [ "${#pdf_files[@]}" -gt 0 ]; then
+  zip -j "$OUT" "${pdf_files[@]}"   # -j = junk paths (store at zip root) [web:90]
+fi
+
+if [ ! -f "$OUT" ]; then
+  echo "Error: no .java (anywhere) or .pdf (directly in $Folder) found to zip"
+  exit 1
+fi
+
+echo "Created: $OUT"
