@@ -13,20 +13,15 @@ public class Q1 {
     public static void main(String[] args) {
         try {
             String arg1 = args[0];
-            try {
-                int num = Integer.parseInt(arg1);
-                try {
-                    long ans = factorial(num);
-                    System.out.println("Factorial of " + num + ": " + ans);
-
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Error: Illegal Argument Exception");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Error: Number Format Exception");
-            }
+            int num = Integer.parseInt(arg1);
+            long ans = factorial(num);
+            System.out.println("Factorial of " + num + ": " + ans);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error: Array Index Out of Bounds");
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Number Format Exception");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: Illegal Argument Exception");
         }
     }
 }
