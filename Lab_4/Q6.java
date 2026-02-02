@@ -39,6 +39,12 @@ class Customer extends User {
     }
 }
 
-public class Q6 {
+class ShoppingCart{
+    
+}
 
+public class Q6 {
+    public static void main(String[] args) {
+        
+    }
 }
