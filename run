@@ -6,7 +6,7 @@ set -euo pipefail
 Folder="$1"
 Question="$2"
 shift 2
-   
+
 javac -d . "$Folder"/*.java
 
 java -cp . "${Folder}.${Question}" "$Folder" "$@"

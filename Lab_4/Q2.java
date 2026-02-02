@@ -49,7 +49,7 @@ public class Q2 {
                 System.out.println(ar.get(i).first + "\t" + ar.get(i).second);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Error: File not Found.");
+            System.out.println("Error: number.txt not found in Lab_4 folder.");
         }
     }
 }
