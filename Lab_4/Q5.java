@@ -3,6 +3,13 @@ package Lab_4;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+class InsufficientBalanceException extends Exception {
+
+    public InsufficientBalanceException(String message) {
+        super(message);
+    }
+}
+
 class ATMAccount {
 
     private final long AccountNo;
@@ -23,9 +30,9 @@ class ATMAccount {
         System.out.println("\nAmount deposited.");
     }
 
-    public void withdraw(double amount) {
+    public void withdraw(double amount) throws InsufficientBalanceException {
         if (amount > balance) {
-            throw new IllegalArgumentException("Insufficient Balance.");
+            throw new InsufficientBalanceException("Withdrawal amount exceeds current balance.");
         }
         balance -= amount;
         System.out.println("\nAmount Withdrawn.");
@@ -39,7 +46,7 @@ class ATMAccount {
     }
 
     public void showBalance() {
-        System.out.println("\nAccount: " + AccountNo + "\nBalance:" + balance);
+        System.out.println("\nAccount: " + AccountNo + "\nBalance: " + balance);
     }
 }
 
@@ -62,7 +69,7 @@ public class Q5 {
                     double amount;
                     int months;
                     switch (choice) {
-                        case 1 -> {
+                        case 1: {
                             System.out.print("Enter Amount:");
                             amount = sc.nextDouble();
                             try {
@@ -70,19 +77,21 @@ public class Q5 {
                             } catch (IllegalArgumentException e) {
                                 System.out.println(e);
                             } finally {
+                                break;
                             }
                         }
-                        case 2 -> {
+                        case 2: {
                             System.out.print("Enter Amount:");
                             amount = sc.nextDouble();
                             try {
                                 account.withdraw(amount);
-                            } catch (IllegalArgumentException e) {
+                            } catch (InsufficientBalanceException e) {
                                 System.out.println(e);
                             } finally {
+                                break;
                             }
                         }
-                        case 3 -> {
+                        case 3: {
                             System.out.print("Enter number of Months:");
                             months = sc.nextInt();
                             try {
@@ -90,11 +99,13 @@ public class Q5 {
                             } catch (ArithmeticException e) {
                                 System.out.println(e);
                             } finally {
+                                break;
                             }
                         }
-                        case 4 ->
+                        case 4:
                             account.showBalance();
-                        default ->
+                            break;
+                        default:
                             choice = 0;
                     }
                 } catch (InputMismatchException e) {
