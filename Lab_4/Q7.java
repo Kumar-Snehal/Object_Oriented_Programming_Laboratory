@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 abstract class Person {
 
-    private int personId;
-    private String name;
-    private int age;
+    protected int personId;
+    protected String name;
+    protected int age;
 
     private static int nextPersonId = 1;
 
@@ -21,7 +21,7 @@ abstract class Person {
     }
 
     public void logout() {
-
+        System.out.println("Logged out successfully");
     }
 }
 
@@ -39,7 +39,7 @@ class Doctor extends Person {
     }
 
     public void PrescribeMedicine() {
-
+        System.out.println("Doctor " + name + " is prescribing medicine.");
     }
 }
 
@@ -59,7 +59,7 @@ class Patient extends Person {
     }
 
     public void bookAppointment() {
-
+        System.out.println("Booking appointment for patient " + name);
     }
 
     public void admitToWard(Ward w) {
@@ -126,11 +126,11 @@ class Appointment {
     }
 
     public void confirm() {
-
+        System.out.println("Appointment " + appointmentId + " confirmed.");
     }
 
     public void cancel() {
-
+        System.out.println("Appointment " + appointmentId + " cancelled.");
     }
 
     public double generateBill() {
@@ -157,6 +157,7 @@ class Billing {
 
     public double generateBill(double amount) {
         this.amount = amount;
+        System.out.println("Generated bill with ID: " + billId + " and amount: " + amount);
         return amount;
     }
 }
@@ -210,6 +211,6 @@ class Medicine {
 public class Q7 {
 
     public static void main(String[] args) {
-
+        System.out.println("Please refer to the code in Q7.java for the implementation of the classes and their methods.");
     }
 }

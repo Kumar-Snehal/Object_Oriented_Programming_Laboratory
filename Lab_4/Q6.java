@@ -4,10 +4,10 @@ import java.util.*;
 
 abstract class User {
 
-    private String userId;
-    private String password;
-    private String loginStatus;
-    private java.util.Date registerDate;
+    protected String userId;
+    protected String password;
+    protected String loginStatus;
+    protected java.util.Date registerDate;
 
     public User(String userId, String password) {
         this.userId = userId;
@@ -18,14 +18,6 @@ abstract class User {
 
     public boolean verifyLogin(String userId, String password) {
         return this.userId.equals(userId) && this.password.equals(password);
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }
 
@@ -49,11 +41,20 @@ class Customer extends User {
     }
 
     public void register() {
-
+        this.registerDate = new java.util.Date();
     }
 
     public void login() {
-
+        System.out.print("Enter password: ");
+        Scanner sc = new Scanner(System.in);
+        String pass = sc.next();
+        sc.close();
+        if (verifyLogin(userId, pass)) {
+            this.loginStatus = "Logged In";
+            System.out.println("Login successful");
+        } else {
+            System.out.println("Invalid credentials");
+        }
     }
 
     public void updateProfile(String name, String address, String creditCardInfo, String shippingInfo) {
@@ -76,7 +77,6 @@ class Administrator extends User {
     }
 
     public boolean updateCatalog(int productId) {
-
         return true;
     }
 }
@@ -94,17 +94,23 @@ class ShoppingCart {
     }
 
     public void addCardItem(int productId, int quantity) {
+        this.productId = productId;
+        this.quantity = quantity;
     }
 
     public void updateQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void viewCartDetails() {
-
+        System.out.println("Cart ID: " + cardId);
+        System.out.println("Product ID: " + productId);
+        System.out.println("Quantity: " + quantity);
+        System.out.println("Date Added: " + dateAdded);
     }
 
     public void checkOut() {
-
+        System.out.println("Checking out cart with ID: " + cardId);
     }
 }
 
@@ -133,7 +139,6 @@ class Order {
     }
 
     public void placeOrder() {
-
         this.status = "Placed";
     }
 }
@@ -192,6 +197,6 @@ class ShippingInfo {
 public class Q6 {
 
     public static void main(String[] args) {
-
+        System.out.println("Please refer to the code in Q6.java for the implementation of the classes and their methods.");
     }
 }
