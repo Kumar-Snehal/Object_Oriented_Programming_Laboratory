@@ -1,7 +1,5 @@
 package Lab_5;
 
-import java.util.*;
-
 class Stack<T> {
     private class Node<U> {
         U data;
@@ -13,7 +11,7 @@ class Stack<T> {
         }
     }
 
-    Node<T> top;
+    private Node<T> top;
     private int size;
 
     public Stack() {
@@ -22,15 +20,16 @@ class Stack<T> {
     }
 
     public void push(T item) {
-        Node<T> newTop = new Node<T>(item);
+        Node<T> newTop = new Node<>(item);
         newTop.next = top;
         top = newTop;
         size++;
     }
 
     public T pop() {
-        if (size == 0 || top == null)
+        if (size == 0 || top == null) {
             return null;
+        }
         T retVal = top.data;
         top = top.next;
         size--;
