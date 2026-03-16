@@ -37,7 +37,7 @@ class Stack<T> {
     }
 
     public T peek() {
-        if(top==null){
+        if (top == null) {
             return null;
         }
         return top.data;

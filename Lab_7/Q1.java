@@ -2,22 +2,22 @@ package Lab_7;
 
 import java.util.ArrayList;
 
-interface Course {
+interface AcademicComponent {
     public String getTitle();
 
     public void setTitle(String title);
 
-    public void Display();
+    public void display();
 
-    public void addCourse(Course c);
+    public void add(AcademicComponent c);
 
-    public void removeCourse(Course c);
+    public void remove(AcademicComponent c);
 }
 
-class simpleCourse implements Course {
+class Course implements AcademicComponent {
     private String title;
 
-    public simpleCourse(String title) {
+    public Course(String title) {
         this.title = title;
     }
 
@@ -32,26 +32,26 @@ class simpleCourse implements Course {
     }
 
     @Override
-    public void Display() {
+    public void display() {
         System.out.println("Course:" + title);
     }
 
     @Override
-    public void addCourse(Course c) {
+    public void add(AcademicComponent c) {
         // do nothing
     }
 
     @Override
-    public void removeCourse(Course c) {
+    public void remove(AcademicComponent c) {
         // do nothing
     }
 }
 
-class CourseModule implements Course {
+class CourseModule implements AcademicComponent {
 
     private String title;
 
-    private ArrayList<Course> Courses;
+    private ArrayList<AcademicComponent> Courses;
 
     public CourseModule(String title) {
         this.title = title;
@@ -69,18 +69,18 @@ class CourseModule implements Course {
     }
 
     @Override
-    public void Display() {
+    public void display() {
         System.out.println("Module:" + title);
-        for (Course c : Courses) {
-            c.Display();
+        for (AcademicComponent c : Courses) {
+            c.display();
         }
     }
 
-    public void addCourse(Course c) {
+    public void add(AcademicComponent c) {
         Courses.add(c);
     }
 
-    public void removeCourse(Course c) {
+    public void remove(AcademicComponent c) {
         Courses.remove(c);
     }
 }
@@ -88,24 +88,24 @@ class CourseModule implements Course {
 public class Q1 {
     public static void main(String[] args) {
         // courses
-        Course introProg = new simpleCourse("Introduction to Programming");
-        Course dataStructures = new simpleCourse("Data Structures");
-        Course machineLearning = new simpleCourse("Machine Learning");
-        Course nlp = new simpleCourse("Natural Language Processing");
-        Course finalProject = new simpleCourse("Final Year Project");
+        AcademicComponent introProg = new Course("Introduction to Programming");
+        AcademicComponent dataStructures = new Course("Data Structures");
+        AcademicComponent machineLearning = new Course("Machine Learning");
+        AcademicComponent nlp = new Course("Natural Language Processing");
+        AcademicComponent finalProject = new Course("Final Year Project");
         // Modules
-        Course programmingModule = new CourseModule("Programming Module");
-        programmingModule.addCourse(introProg);
-        programmingModule.addCourse(dataStructures);
-        Course aiModule = new CourseModule("AI Module");
-        aiModule.addCourse(machineLearning);
-        aiModule.addCourse(nlp);
+        AcademicComponent programmingModule = new CourseModule("Programming Module");
+        programmingModule.add(introProg);
+        programmingModule.add(dataStructures);
+        AcademicComponent aiModule = new CourseModule("AI Module");
+        aiModule.add(machineLearning);
+        aiModule.add(nlp);
         // Program root
-        Course csProgram = new CourseModule("Computer Science Program");
-        csProgram.addCourse(programmingModule);
-        csProgram.addCourse(aiModule);
-        csProgram.addCourse(finalProject);
-        // Display program structure
-        csProgram.Display();
+        AcademicComponent csProgram = new CourseModule("Computer Science Program");
+        csProgram.add(programmingModule);
+        csProgram.add(aiModule);
+        csProgram.add(finalProject);
+        // display program structure
+        csProgram.display();
     }
 }
