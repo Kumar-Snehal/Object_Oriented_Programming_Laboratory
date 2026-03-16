@@ -12,6 +12,8 @@ public class Q1 {
         s.insert(3);
         s.insert(5);
         s.insert(10);
+        int[] expected = { 3, 5, 10 };
+        assertArrayEquals(expected, s.toArray());
     }
 
     @Test
@@ -32,24 +34,46 @@ public class Q1 {
 
         s1 = new Set();
         s1.insert(5);
-
         s2 = new Set();
         s2.insert(5);
         s1.section(s2);
+        assertArrayEquals(new int[] {}, s1.toArray());
+        assertArrayEquals(new int[] { 5 }, s2.toArray());
 
         s1 = new Set();
         s1.insert(3);
-
         s2 = new Set();
         s2.insert(5);
         s1.section(s2);
+        assertArrayEquals(new int[] { 3 }, s1.toArray());
+        assertArrayEquals(new int[] { 5 }, s2.toArray());
 
         s1 = new Set();
         s1.insert(5);
-
         s2 = new Set();
         s2.insert(3);
         s1.section(s2);
+        assertArrayEquals(new int[] { 5 }, s1.toArray());
+        assertArrayEquals(new int[] { 3 }, s2.toArray());
+
+        s1 = new Set();
+        s1.insert(3);
+        s1.insert(5);
+        s2 = new Set();
+        s2.insert(5);
+        s1.section(s2);
+        assertArrayEquals(new int[] { 3 }, s1.toArray());
+        assertArrayEquals(new int[] { 5 }, s2.toArray());
+
+        s1 = new Set();
+        s1.insert(4);
+        s1.insert(6);
+        s2 = new Set();
+        s2.insert(4);
+        s2.insert(6);
+        s1.section(s2);
+        assertArrayEquals(new int[] {}, s1.toArray());
+        assertArrayEquals(new int[] { 4, 6 }, s2.toArray());
     }
 
     @Test

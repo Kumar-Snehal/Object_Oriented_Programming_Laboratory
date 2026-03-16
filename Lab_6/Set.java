@@ -21,10 +21,10 @@ public class Set {
         for (int i = 0; i < a.size(); i++) {
             if (a.get(i) > x) {
                 a.add(i, x);
-                break;
+                return;
             } else {
                 if (a.get(i) == x) {
-                    break;
+                    return;
                 }
             }
         }
@@ -48,7 +48,6 @@ public class Set {
         for (int i = 0, j = 0; i < a.size() && j < s.a.size();) {
             if (a.get(i).equals(s.a.get(j))) {
                 a.remove(i);
-                i++;
                 j++;
             } else {
                 if (a.get(i) < s.a.get(j)) {
