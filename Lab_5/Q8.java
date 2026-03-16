@@ -24,7 +24,8 @@ class Repository<K, V> {
     // cannot directly return mpp.values(), because that is linked to the map, hence
     // storing in another structure and returning, to ensure the point of calling
     // function has an effect
-    public ArrayList<V> findAll() {
+    public Collection<V> findAll() {
+        // return mpp.values();
         ArrayList<V> retval = new ArrayList<>();
         for (V it : mpp.values()) {
             retval.add(it);
