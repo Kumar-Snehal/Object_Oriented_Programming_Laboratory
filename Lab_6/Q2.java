@@ -3,7 +3,7 @@ package Lab_6;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class StackTest {
+public class Q2 {
     @Test
     public void testPushCoverage() {
         Stack<Integer> s = new Stack<>();
