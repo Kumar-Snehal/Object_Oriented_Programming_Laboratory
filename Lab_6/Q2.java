@@ -27,6 +27,7 @@ public class Q2 {
     @Test
     public void testPeekCoverage() {
         Stack<Double> s = new Stack<>();
+        assertNull("Peeking an empty stack should return null", s.peek());
         s.push(3.14);
         assertEquals(Double.valueOf(3.14), s.peek());
     }
