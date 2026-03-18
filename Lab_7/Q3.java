@@ -109,13 +109,8 @@ class DialingUIO extends UIO {
  * Printing to the screen:
  * System.out.println("hello");
  */
-class Screen implements Observer {
+class Screen {
     private final PhoneModel model;
-
-    @Override
-    public void update(String s) {
-        System.out.println(s);
-    }
 
     public Screen(PhoneModel model) {
         this.model = model;
