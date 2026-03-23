@@ -12,7 +12,7 @@ public class Main {
         student.addEnrollment(new Enrollment(c1, 8.0));
         student.addEnrollment(new Enrollment(c2, 7.0));
 
-        double gpa = GPAUtil.calculateGPA(student);
+        double gpa = student.calculateGPA();
 
         System.out.println("GPA: " + gpa);
     }

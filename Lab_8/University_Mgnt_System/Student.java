@@ -17,4 +17,16 @@ class Student {
     public List<Enrollment> getEnrollments() {
         return enrollments;
     }
+
+    public double calculateGPA() {
+        double total = 0;
+        int credits = 0;
+
+        for (Enrollment e : enrollments) {
+            total += e.getGrade() * e.getCourse().getCredits();
+            credits += e.getCourse().getCredits();
+        }
+
+        return total / credits;
+    }
 }

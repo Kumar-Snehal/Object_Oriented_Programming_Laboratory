@@ -8,4 +8,12 @@ class Mission {
     public List<Package> getPackages() {
         return packages;
     }
+
+    public void addPackage(String id, String address, double weight) {
+        packages.add(new Package(id, address, weight));
+    }
+
+    public void removePackage(Package p) {
+        packages.remove(p);
+    }
 }

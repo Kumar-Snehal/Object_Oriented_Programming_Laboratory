@@ -5,11 +5,8 @@ public class Main {
 
         Mission mission = new Mission();
 
-        Package p1 = new Package("P1", "City A", 5.0);
-        Package p2 = new Package("P2", "City B", 3.5);
-
-        mission.getPackages().add(p1);
-        mission.getPackages().add(p2);
+        mission.addPackage("P1", "City A", 5.0);
+        mission.addPackage("P2", "City B", 3.5);
 
         for (Package p : mission.getPackages()) {
             p.display();
