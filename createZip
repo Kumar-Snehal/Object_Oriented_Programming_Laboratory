@@ -17,12 +17,17 @@ fi
 
 # 1) Add ONLY .java files, keeping them inside the Lab folder path in the zip
 shopt -s globstar nullglob
+directory_files=( "$Folder"/**/* )
 java_files=( "$Folder"/**/*.java )
 txt_files=( "$Folder"/**/*.txt )
 pdf_files=( "$Folder"/*.pdf )
 shopt -u globstar
 
 rm -f "$OUT"
+
+if [ "${#directory_files[@]}" -eq 0 ]; then
+  zip -r "$OUT" "$Folder"
+fi
 
 if [ "${#java_files[@]}" -gt 0 ]; then
   zip -r "$OUT" "${java_files[@]}"
