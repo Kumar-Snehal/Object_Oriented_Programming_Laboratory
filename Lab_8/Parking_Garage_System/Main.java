@@ -5,34 +5,17 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+        ParkingController garage = new ParkingController(2);
+        Vehicle v1 = new Vehicle("KA01AB1234", "Car");
 
-        List<ParkingSlot> slots = new ArrayList<>();
-        slots.add(new ParkingSlot(1));
-        slots.add(new ParkingSlot(2));
+        garage.viewAvailableSlots();
+        ParkingSlot assignedSlot = garage.park(v1);
+        garage.viewAvailableSlots();
 
-        Vehicle v = new Vehicle("KA01AB1234", "Car");
-
-        // Assign slot (bad design)
-        for (ParkingSlot slot : slots) {
-            if (slot.isAvailable()) {
-                slot.assignSlot();
-                System.out.println("Vehicle parked in slot " + slot.getSlotNumber());
-                break;
-            }
+        if (assignedSlot != null) {
+            garage.unpark(v1, assignedSlot);
         }
 
-        // Display available slots
-        System.out.print("Available slots: ");
-        for (ParkingSlot slot : slots) {
-            if (slot.isAvailable()) {
-                System.out.print(slot.getSlotNumber() + " ");
-            }
-        }
-        System.out.println();
-
-        // Calculate fee (bad design)
-        PaymentSystem payment = new PaymentSystem();
-        double fee = payment.calculateFee(v.getEntryTime());
-        System.out.println("Parking fee: " + fee);
+        garage.viewAvailableSlots();
     }
 }
