@@ -24,6 +24,7 @@ class WithdrawThread implements Runnable {
     private BankAccount account;
     private int amount;
     private int times;
+
     private static int threadCounter = 0;
     private int threadId;
 
@@ -39,6 +40,11 @@ class WithdrawThread implements Runnable {
         System.out.println("Thread " + threadId + " attempting to withdraw " + amount + " for " + times + " times.");
         for (int i = 0; i < times; i++) {
             account.withdraw(amount);
+            try {
+                Thread.sleep(100); // Simulate time taken for withdrawal
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
@@ -46,15 +52,23 @@ class WithdrawThread implements Runnable {
 public class Q2 {
     public static void main(String[] args) {
         BankAccount account = new BankAccount(1000);
-        Thread thread1 = new Thread(new WithdrawThread(account, 100, 5));
-        Thread thread2 = new Thread(new WithdrawThread(account, 100, 5));
 
-        thread1.start();
-        thread2.start();
+        int count = 4; // Number of threads
+        int times = 10; // Number of withdrawals each thread will attempt
+
+        Thread[] threads = new Thread[count];
+        for (int i = 0; i < count; i++) {
+            threads[i] = new Thread(new WithdrawThread(account, 1000 / (times * count), times));
+        }
+
+        for (int i = 0; i < count; i++) {
+            threads[i].start();
+        }
 
         try {
-            thread1.join();
-            thread2.join();
+            for (int i = 0; i < count; i++) {
+                threads[i].join();
+            }
             System.out.println("Final balance:");
             account.showBalance();
         } catch (InterruptedException e) {
