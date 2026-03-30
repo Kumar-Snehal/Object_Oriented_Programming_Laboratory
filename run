@@ -10,3 +10,5 @@ shift 2
 javac -d . "$Folder"/*.java
 
 java -cp . "${Folder}.${Question}" "$Folder" "$@"
+
+./clearClass
