@@ -1,7 +1,5 @@
 package Lab_9;
 
-import java.util.*;
-
 class Buffer {
     private int size;
     private int[] arr;
