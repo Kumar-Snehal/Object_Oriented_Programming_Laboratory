@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class RestuarantSystem {
+public class RestaurantSystem {
 
     private static Connection con;
     private static Scanner sc;
@@ -43,45 +43,77 @@ public class RestuarantSystem {
         System.out.println("Tables created!");
     }
 
-    static void insert(Statement stmt) {
+    static void insert() {
         System.out.println("Enter Table to Insert (Customers/Orders): ");
         String table = sc.next();
         sc.nextLine();
-        String insertQuery = "";
-        switch (table) {
-            case "Customers":
+
+        if (table.equalsIgnoreCase("Customers")) {
+            String insertQuery = "INSERT INTO Customers (customer_name, contact_number) VALUES (?, ?)";
+
+            try (java.sql.PreparedStatement pstmt = con.prepareStatement(insertQuery)) {
                 System.out.println("Enter Customer Name: ");
                 String name = sc.nextLine();
                 System.out.println("Enter Contact Number: ");
                 int contact = sc.nextInt();
-                insertQuery = "INSERT INTO Customers (customer_name, contact_number) VALUES ('"
-                        + name + "', " + contact + ")";
-                break;
-            case "Orders":
+                sc.nextLine();
+                pstmt.setString(1, name);
+                pstmt.setInt(2, contact);
+
+                pstmt.executeUpdate();
+                System.out.println("Successfully inserted customer!");
+            } catch (SQLException e) {
+                System.out.println("SQL Exception: " + e.getMessage());
+            }
+
+        } else if (table.equalsIgnoreCase("Orders")) {
+            String insertQuery = "INSERT INTO Orders (customer_id, food_item, quantity, status, price) "
+                    + "VALUES (?, ?, ?, ?, ?)";
+
+            try (java.sql.PreparedStatement pstmt = con.prepareStatement(insertQuery)) {
                 System.out.println("Enter Customer ID: ");
                 int customerId = sc.nextInt();
                 sc.nextLine();
+
+                if (!customerExists(customerId)) {
+                    System.out.println("Error: Customer ID " + customerId
+                            + " does not exist. Please register the customer first.");
+                    return;
+                }
+
                 System.out.println("Enter Food Item: ");
                 String foodItem = sc.nextLine();
                 System.out.println("Enter Quantity: ");
                 int quantity = sc.nextInt();
-                boolean status = false;
                 System.out.println("Enter Price: ");
                 double price = sc.nextDouble();
-                insertQuery = "INSERT INTO Orders (customer_id, food_item, quantity, status, price) VALUES (" +
-                        customerId + ", '" + foodItem + "', " + quantity + ", " + status + ", " + price + ")";
-                break;
-            default:
-                System.out.println("Invalid table!");
-                return;
+
+                pstmt.setInt(1, customerId);
+                pstmt.setString(2, foodItem);
+                pstmt.setInt(3, quantity);
+                pstmt.setBoolean(4, false);
+                pstmt.setDouble(5, price);
+
+                pstmt.executeUpdate();
+                System.out.println("Successfully inserted order!");
+            } catch (SQLException e) {
+                System.out.println("SQL Exception: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Invalid table!");
         }
-        try {
-            stmt.executeUpdate(insertQuery);
-            System.out.println("Succesfully inserted!");
+    }
+
+    static boolean customerExists(int customerId) {
+        String checkQuery = "SELECT 1 FROM Customers WHERE customer_id = ?";
+        try (java.sql.PreparedStatement pstmt = con.prepareStatement(checkQuery)) {
+            pstmt.setInt(1, customerId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return rs.next();
+            }
         } catch (SQLException e) {
-            System.out.println("SQL Exception: " + e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Database error while verifying customer: " + e.getMessage());
+            return false;
         }
     }
 
@@ -100,7 +132,7 @@ public class RestuarantSystem {
         }
     }
 
-    static void retreive(Statement stmt) {
+    static void retrieve(Statement stmt) {
         String retrieveQuery = "SELECT o.order_id, c.customer_name, o.food_item, o.quantity, o.price " +
                 "FROM Orders o JOIN Customers c ON o.customer_id = c.customer_id and o.status = false";
         try {
@@ -261,13 +293,13 @@ public class RestuarantSystem {
             }
             switch (choice) {
                 case 1:
-                    insert(stmt);
+                    insert();
                     break;
                 case 2:
                     update(stmt);
                     break;
                 case 3:
-                    retreive(stmt);
+                    retrieve(stmt);
                     break;
                 case 4:
                     analyze(stmt);
