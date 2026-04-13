@@ -180,7 +180,7 @@ public class RestaurantSystem {
                 query = "SELECT c.customer_name, SUM(o.price * o.quantity) AS total_spending "
                         + "FROM Orders o JOIN Customers c ON o.customer_id = c.customer_id "
                         + "GROUP BY c.customer_id "
-                        + "HAVING SUM(o.price * o.quantity) > " + minSpending;
+                        + "HAVING SUM(o.price * o.quantity) >= " + minSpending;
                 break;
             default:
                 System.out.println("Invalid choice!");
