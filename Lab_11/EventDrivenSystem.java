@@ -1,8 +1,13 @@
 package Lab_11;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
+
 class EventSource extends EventSubject {
 
     private final DatabaseManager dbManager;
+    private final ExecutorService executor = Executors.newFixedThreadPool(5);
 
     public EventSource(DatabaseManager dbManager) {
         this.dbManager = dbManager;
@@ -10,29 +15,27 @@ class EventSource extends EventSubject {
 
     @Override
     public void notifyListeners(String eventName, int eventId) {
-        Thread[] threads = new Thread[listeners.size()];
-        int i = 0;
+        List<Future<?>> futures = new ArrayList<>();
 
         for (EventListener listener : listeners) {
-            Thread t = new Thread(new Runnable() {
+            Future<?> future = executor.submit(new Runnable() {
                 @Override
                 public void run() {
                     listener.onEvent(eventName);
                 }
             });
-            threads[i++] = t;
-            t.start();
+            futures.add(future);
         }
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    for (Thread t : threads) {
-                        t.join();
+                    for (Future<?> future : futures) {
+                        future.get();
                     }
                     dbManager.updateEventStatus(eventId, "PROCESSED");
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -40,11 +43,15 @@ class EventSource extends EventSubject {
     }
 
     public void generateEvent(String eventName) {
-        System.out.println("\n>>> Firing Event: " + eventName);
+        System.out.println("\n<<< Firing Event >>>: " + eventName);
 
         int eventId = dbManager.insertEvent(eventName, "PENDING");
 
         notifyListeners(eventName, eventId);
+    }
+
+    public void shutdown() {
+        executor.shutdown();
     }
 }
 
@@ -69,5 +76,7 @@ public class EventDrivenSystem {
         }
 
         dbManager.fetchEventHistory();
+
+        eventSource.shutdown();
     }
 }

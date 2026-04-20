@@ -59,7 +59,7 @@ public class DatabaseManager {
         try {
             Statement stmt = connection.createStatement();
             stmt.executeUpdate(sql);
-            System.out.println("[Database] Updated Event ID " + id + " to status: " + newStatus);
+            System.out.println("\n[Database] Updated Event ID " + id + " to status: " + newStatus);
         } catch (SQLException e) {
             System.out.println("SQL Exception: " + e.getMessage());
         } catch (Exception e) {
