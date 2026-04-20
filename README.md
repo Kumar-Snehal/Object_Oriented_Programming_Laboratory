@@ -30,7 +30,7 @@ This repository contains practical implementations of Object-Oriented Programmin
 
 Kindly refer to the pdf report files in each Lab folder to see how to compile and run the code files
 
-Utility Scripts
+### Utility Scripts
 
 This repository includes a few helper shell scripts in the root directory to streamline development and submission:
 
